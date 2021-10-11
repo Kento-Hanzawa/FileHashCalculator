@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileHashCalculator", "FileHashCalculator\FileHashCalculator.csproj", "{1EC2D455-3FC7-40AB-8D81-D52E1B7C6E34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9B925F1-CA8F-4497-94E2-3AD05EDB2FB8}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHashCalculator.Tests", "FileHashCalculator.Tests\FileHashCalculator.Tests.csproj", "{73C599FC-2701-4AE8-95E2-C8D78ABC9576}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EC2D455-3FC7-40AB-8D81-D52E1B7C6E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC2D455-3FC7-40AB-8D81-D52E1B7C6E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC2D455-3FC7-40AB-8D81-D52E1B7C6E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC2D455-3FC7-40AB-8D81-D52E1B7C6E34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73C599FC-2701-4AE8-95E2-C8D78ABC9576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73C599FC-2701-4AE8-95E2-C8D78ABC9576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73C599FC-2701-4AE8-95E2-C8D78ABC9576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73C599FC-2701-4AE8-95E2-C8D78ABC9576}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1EC2D455-3FC7-40AB-8D81-D52E1B7C6E34} = {F9B925F1-CA8F-4497-94E2-3AD05EDB2FB8}
+		{73C599FC-2701-4AE8-95E2-C8D78ABC9576} = {F9B925F1-CA8F-4497-94E2-3AD05EDB2FB8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAF3052C-A4FB-4D28-99FA-2CBC1799CF36}
+	EndGlobalSection
+EndGlobal
