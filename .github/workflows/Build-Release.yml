@@ -1,0 +1,76 @@
+name: Build-Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "tag: git tag you want create. (ex. '1.0.0')"
+        required: true
+
+env:
+  INPUT_TAG: ${{ github.event.inputs.tag }}
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release -p:Version=${{ env.INPUT_TAG }}
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --configuration Release
+
+    # win-x64  
+    - name: Publish win-x64 (Try Re-Build)
+      run:  dotnet publish "./FileHashCalculator/FileHashCalculator.csproj" --configuration Release --runtime win-x64 --self-contained true --output "./FileHashCalculator-${{ env.INPUT_TAG }}-win-x64" -p:Version=${{ env.INPUT_TAG }} -p:PublishSingleFile=true
+    - name: Zip win-x64
+      run:  zip -r "./FileHashCalculator-${{ env.INPUT_TAG }}-win-x64.zip" "./FileHashCalculator-${{ env.INPUT_TAG }}-win-x64"
+    - name: Upload artifact  
+      uses: actions/upload-artifact@v2
+      with:
+        name: publish
+        path: ./FileHashCalculator-${{ env.INPUT_TAG }}-win-x64.zip
+        
+  create-release:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Create tag
+        run: git tag ${{ env.INPUT_TAG }}
+      - name: Push tag
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
+       
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.INPUT_TAG }}
+          release_name: Ver.${{ env.INPUT_TAG }}
+          draft: true
+          prerelease: false
+          
+      # Upload win-x64 zip
+      - uses: actions/download-artifact@v2
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./publish/FileHashCalculator-${{ env.INPUT_TAG }}-win-x64.zip
+          asset_name: FileHashCalculator-${{ env.INPUT_TAG }}-win-x64.zip
+          asset_content_type: application/zip
+          
