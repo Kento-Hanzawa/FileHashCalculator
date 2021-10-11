@@ -60,7 +60,7 @@ namespace FileHashCalculator.Tests
         {
             var baseDirectory = Path.GetTempPath();
             using var scope = new TemporaryDirectoryScope(baseDirectory);
-            Assert.Equal(baseDirectory, scope.Directory.Parent?.FullName + '\\');
+            Assert.Equal(baseDirectory, scope.Directory.Parent?.FullName + Path.DirectorySeparatorChar);
         }
     }
 }
