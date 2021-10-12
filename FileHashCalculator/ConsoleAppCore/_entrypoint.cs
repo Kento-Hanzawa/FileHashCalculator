@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Text.Unicode;
 using ConsoleAppFramework;
 using Cysharp.Text;
+using FileHashCalculator;
 using FileHashCalculator.ConsoleAppCore;
 using FileHashCalculator.ConsoleAppCore.Filters;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ZLogger;
-using AppProgram = FileHashCalculator.AppProgram;
 using AppSettings = FileHashCalculator.AppSettings;
 
 
@@ -187,6 +187,7 @@ await Host.CreateDefaultBuilder()
 #else
     .RunConsoleAppFrameworkAsync<AppProgram>(args, new ConsoleAppOptions()
     {
+        StrictOption = true,
         GlobalFilters = new ConsoleAppFilter[]
         {
             new LogEnvironmentInfoFilter() { Order = int.MinValue + 1 },

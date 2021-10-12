@@ -14,7 +14,7 @@ namespace FileHashCalculator.ConsoleAppCore.Filters
     /// <remarks>参考: <see href="https://github.com/Cysharp/ConsoleAppFramework#filter"/></remarks>
     internal sealed class MutexFilter : ConsoleAppFilter
     {
-        public async override ValueTask Invoke(ConsoleAppContext context, Func<ConsoleAppContext, ValueTask> next)
+        public override async ValueTask Invoke(ConsoleAppContext context, Func<ConsoleAppContext, ValueTask> next)
         {
             var name = $"{Assembly.GetExecutingAssembly().GetName().Name}.{context.MethodInfo.DeclaringType?.ToString() ?? "(UnknownDeclaringType)"}.{context.MethodInfo.Name}";
             context.Logger.ZLogDebug("# Mutex Identifier: {0}", name);

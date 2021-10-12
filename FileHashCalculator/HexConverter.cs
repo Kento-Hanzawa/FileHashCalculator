@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileHashCalculator
 {
     public static class HexConverter
     {
+        // Hexadecimal Chars
+        private static readonly char[] _HEX = "0123456789ABCDEF".ToCharArray();
+        private static readonly char[] _hex = "0123456789abcdef".ToCharArray();
+
         public static string ToHexString(in ReadOnlySpan<byte> value, bool isUpperCase = true)
         {
             if (value.Length == 0)
@@ -16,11 +16,9 @@ namespace FileHashCalculator
                 return string.Empty;
             }
 
-            ReadOnlySpan<char> hex = isUpperCase
-                ? stackalloc char[16] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' }
-                : stackalloc char[16] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-            int hexLength = value.Length * 2;
-            char[] buffer = ArrayPool<char>.Shared.Rent(hexLength);
+            int length = value.Length * 2; // byte -> "00" ~ "FF"
+            char[] hex = isUpperCase ? _HEX : _hex;
+            char[] buffer = ArrayPool<char>.Shared.Rent(length);
             try
             {
                 int index = 0;
@@ -29,7 +27,7 @@ namespace FileHashCalculator
                     buffer[index++] = hex[unchecked(b >> 4)];
                     buffer[index++] = hex[unchecked(b & 0x0F)];
                 }
-                return new string(buffer.AsSpan(0, hexLength));
+                return new string(buffer.AsSpan(0, length));
             }
             finally
             {

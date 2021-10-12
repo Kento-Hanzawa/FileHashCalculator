@@ -1,5 +1,4 @@
-﻿using System.IO;
-using FileHashCalculator.ConsoleAppCore;
+﻿using FileHashCalculator.ConsoleAppCore;
 
 namespace FileHashCalculator
 {
@@ -10,8 +9,5 @@ namespace FileHashCalculator
     internal sealed record AppSettings : AppSettingsCore
     {
         public static AppSettings Default { get; } = new AppSettings();
-
-        public bool IgnoreHiddenFile { get; init; } = true;
-        public char DirectorySeparatorChar { get; init; } = Path.DirectorySeparatorChar;
     }
 }
