@@ -15,7 +15,6 @@
     <PackageReference Include="ConsoleAppFramework" Version="3.3.1" />
     <PackageReference Include="ConsoleAppFramework.WebHosting" Version="3.3.1" />
     <PackageReference Include="CyclicRedundancyChecks" Version="2.0.4" />
-    <PackageReference Include="ExcelExporterCore" Version="1.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
